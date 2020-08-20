@@ -1,8 +1,6 @@
 import { reactive, readonly, toRefs } from 'vue';
 import LRU from 'lru-cache';
 
-import { asArray } from '../utils/as-array';
-
 const CACHE = new LRU({ max: 1024 });
 
 const DEFAULT_OPTIONS = {
@@ -25,7 +23,12 @@ export function useSwrCache(parameter, callback, customOptions) {
   };
 
   // Wrap `parameter` in an array if it is not an array already.
-  const parameters = asArray(parameter);
+  if (!Array.isArray(parameter)) {
+    const error = "Invalida type: Parameter has to be a Array format"
+    console.error(error)
+  }
+
+  const parameters = parameter;
   // Naive way of creating a unique cache key.
   const cacheKey = `${JSON.stringify(parameters)}${callback.toString()}`;
   const cacheKeyDedupe = `${cacheKey}_dedupe`;
