@@ -8,7 +8,7 @@ The useSWR hook requires two things to make it work:
 * A fetcher: This is a function who will do the work of making the actual API request. In our case we'll be using fetch, but you could use axios if you prefer. Its only requirement is that it returns a promise which resolves the data you are fetching.
 
 Example code:
-    
+``` 
 <script>
 import { fetcher } from '../utils/fetcher';
 import { useSwrCache, STATE } from '../composables/swr-cache';
@@ -31,3 +31,4 @@ export default {
   },
 };
 </script>
+```
